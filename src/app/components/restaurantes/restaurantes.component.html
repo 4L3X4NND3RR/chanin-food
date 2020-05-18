@@ -1,0 +1,26 @@
+<h1>Restaurantes</h1>
+<hr>
+<mat-grid-list cols="3" rowHeight="500px">
+    <mat-grid-tile *ngFor="let restaurante of restaurantes" [colspan]="colspan" [rowspan]="1">
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+                <mat-card-title class="link" routerLink="/menu/{{restaurante.id}}">
+                    {{restaurante.nombre}}
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        <button mat-menu-item routerLink="/menu/{{restaurante.id}}">Ver menu</button>
+                    </mat-menu>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{restaurante.imageUrl}}" class="link" routerLink="/menu/{{restaurante.id}}" alt="Foto restaurante" width="100px" height="300px">
+            <mat-card-content class="dashboard-card-content">
+                <strong>Dirección</strong>
+                <p>{{restaurante.direccion}}</p>
+                <strong>Teléfono</strong>
+                <p>{{restaurante.telefono}}</p>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
