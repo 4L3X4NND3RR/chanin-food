@@ -11,15 +11,18 @@ import { Platillo } from '../common/platillo';
 })
 export class RestauranteService {
   private baseUrl = 'http://localhost:8080/api/restaurantes';
-  private baseUrlPlatillos = 'http://localhost:8080/api/categorias';
+  private baseUrlPlatillos = 'http://localhost:8080/api/platillos/search';
   private baseUrlPlatillo = 'http://localhost:8080/api/platillos';
 
   constructor(private httpClient: HttpClient) { }
 
-  getRestaurantes(): Observable<Restaurante[]> {
-    return this.httpClient.get<GetResponseRestaurantes>(this.baseUrl).pipe(
-      map(response => response._embedded.restaurantes)
-    );
+  getRestaurantesPaginate(pageNumber: number, pageSize: number): Observable<GetResponseRestaurantes> {
+    return this.httpClient.get<GetResponseRestaurantes>(`${this.baseUrl}?page=${pageNumber}&size=${pageSize}`);
+  }
+
+  searchRestaurantesPaginate(pageNumber: number, pageSize: number, keyword: String): Observable<GetResponseRestaurantes> {
+    const searchUrl = `${this.baseUrl}/search/findByNombreContaining?nombre=${keyword}&page=${pageNumber}&size=${pageSize}`;
+    return this.httpClient.get<GetResponseRestaurantes>(searchUrl);
   }
 
   getCategorias(idRestaurante: number): Observable<Categoria[]> {
@@ -29,11 +32,14 @@ export class RestauranteService {
     );
   }
 
-  getPlatillos(idCategoria: number): Observable<Platillo[]> {
-    const urlPlatillo = `${this.baseUrlPlatillos}/${idCategoria}/platillos`;
-    return this.httpClient.get<GetResponsePlatillos>(urlPlatillo).pipe(
-      map(response => response._embedded.platilloes)
-    );
+  getPlatillosPaginate(idCategoria: number, pageNumber: number, pageSize: number): Observable<GetResponsePlatillos> {
+    const urlPlatillo = `${this.baseUrlPlatillos}/getPlatillosByCategoriaId?id=${idCategoria}&page=${pageNumber}&size=${pageSize}`;
+    return this.httpClient.get<GetResponsePlatillos>(urlPlatillo);
+  }
+
+  searchPlatillosPaginate(pageNumber: number, pageSize: number, keyword: String, idCategoria: number): Observable<GetResponsePlatillos> {
+    const searchUrl = `${this.baseUrlPlatillos}/findByNombreContainingAndCategoriaId?nombre=${keyword}&id=${idCategoria}&page=${pageNumber}&size=${pageSize}`;
+    return this.httpClient.get<GetResponsePlatillos>(searchUrl);
   }
 
   getPlatillo(idPlatillo: number): Observable<Platillo> {
@@ -44,6 +50,12 @@ export class RestauranteService {
 interface GetResponseRestaurantes {
   _embedded: {
     restaurantes: Restaurante[];
+  },
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
   }
 }
 
@@ -56,5 +68,11 @@ interface GetResponseCategorias {
 interface GetResponsePlatillos {
   _embedded: {
     platilloes: Platillo[];
+  },
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
   }
 }

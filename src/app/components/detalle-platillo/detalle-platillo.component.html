@@ -1,0 +1,21 @@
+<mat-grid-list cols="3" rowHeight="300px" role="list">
+    <mat-grid-tile [colspan]="3" role="listitem">
+        <img src="assets/images/platillos/hamburguesa.jpg" alt="Foto platillo">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="colspanSpace" role="listitem"></mat-grid-tile>
+    <mat-grid-tile role="listitem" [colspan]="colspanCard" role="listitem">
+        <mat-card>
+            <mat-card-title>{{platillo.nombre}}</mat-card-title>
+            <mat-card-content>
+                <p>Precio: {{platillo.precio | currency: 'Q'}}</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, cumque voluptatibus ullam rem magni rerum. Optio esse odit saepe ea. Provident totam dicta nulla ducimus facere autem soluta, dignissimos sunt.</p>  
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="agregarProducto()">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                    Agregar al carrito
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

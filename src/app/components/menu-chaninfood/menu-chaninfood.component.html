@@ -8,13 +8,17 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color="primary">
-            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-                *ngIf="isHandset$ | async">
-                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-            </button>
-            <span>Chanin Food</span>
-            <span class="example-spacer"></span>
-            <app-cart-status></app-cart-status>
+            <mat-toolbar-row>
+                <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <span class="link" routerLink="/restaurantes">Chanin Food</span>
+                <span class="example-spacer"></span>
+                <app-cart-status></app-cart-status>
+            </mat-toolbar-row>
+            <mat-toolbar-row *ngIf="estaRestaurantesOrPlatillos()">
+                <app-search></app-search>
+            </mat-toolbar-row>
         </mat-toolbar>
         <!-- MAIN CONTENT -->
         <div class="grid-container">

@@ -22,8 +22,8 @@
   z-index: 1;
 }
 
-.example-icon {
-  right: 0;
+.link{
+  cursor: pointer;
 }
 
 .example-spacer {

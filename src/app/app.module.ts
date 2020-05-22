@@ -16,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
 import { MenuChaninfoodComponent } from './components/menu-chaninfood/menu-chaninfood.component';
 import { RestaurantesComponent } from './components/restaurantes/restaurantes.component';
 import { MenuPlatillosComponent } from './components/menu-platillos/menu-platillos.component';
@@ -23,8 +25,11 @@ import { PlatillosComponent } from './components/platillos/platillos.component';
 import { ShoppingCartModalComponent } from './components/shopping-cart-modal/shopping-cart-modal.component';
 import { DetallePlatilloComponent } from './components/detalle-platillo/detalle-platillo.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
+  { path: 'buscar-platillo/:keyword', component: PlatillosComponent },
+  { path: 'buscar-restaurante/:keyword', component: RestaurantesComponent },
   { path: 'platillo/:idPlatillo', component: DetallePlatilloComponent },
   { path: 'platillos/:idCategoria', component: PlatillosComponent },
   { path: 'menu/:idRestaurante', component: MenuPlatillosComponent },
@@ -42,10 +47,11 @@ const routes: Routes = [
     PlatillosComponent,
     ShoppingCartModalComponent,
     DetallePlatilloComponent,
-    CartStatusComponent
+    CartStatusComponent,
+    SearchComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -59,7 +65,9 @@ const routes: Routes = [
     MatCardModule,
     MatMenuModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

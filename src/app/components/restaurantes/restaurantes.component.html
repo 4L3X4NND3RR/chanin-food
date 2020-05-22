@@ -1,26 +1,43 @@
 <h1>Restaurantes</h1>
-<hr>
-<mat-grid-list cols="3" rowHeight="500px">
+<mat-divider></mat-divider>
+<mat-grid-list cols="3" rowHeight="520px">
     <mat-grid-tile *ngFor="let restaurante of restaurantes" [colspan]="colspan" [rowspan]="1">
         <mat-card class="dashboard-card">
             <mat-card-header>
-                <mat-card-title class="link" routerLink="/menu/{{restaurante.id}}">
-                    {{restaurante.nombre}}
+                <mat-card-title>
+                    <span class="link" routerLink="/menu/{{restaurante.id}}">{{restaurante.nombre}}</span>
                     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button">
                         <mat-icon>more_vert</mat-icon>
                     </button>
-                    <mat-menu #menu="matMenu" xPosition="before">
+                    <mat-menu #menu="matMenu">
                         <button mat-menu-item routerLink="/menu/{{restaurante.id}}">Ver menu</button>
                     </mat-menu>
                 </mat-card-title>
             </mat-card-header>
-            <img mat-card-image src="{{restaurante.imageUrl}}" class="link" routerLink="/menu/{{restaurante.id}}" alt="Foto restaurante" width="100px" height="300px">
+            <img mat-card-image src="{{restaurante.imageUrl}}" class="link" routerLink="/menu/{{restaurante.id}}"
+                alt="Foto restaurante" width="100px" height="300px">
             <mat-card-content class="dashboard-card-content">
                 <strong>Dirección</strong>
                 <p>{{restaurante.direccion}}</p>
                 <strong>Teléfono</strong>
                 <p>{{restaurante.telefono}}</p>
+                <form>
+                    <p class="clasificacion">
+                        <input id="{{restaurante.id}}radio1" type="radio" name="estrellas" value="5">
+                        <label for="{{restaurante.id}}radio1">★</label>
+                        <input id="{{restaurante.id}}radio2" type="radio" name="estrellas" value="4">
+                        <label for="{{restaurante.id}}radio2">★</label>
+                        <input id="{{restaurante.id}}radio3" type="radio" name="estrellas" value="3">
+                        <label for="{{restaurante.id}}radio3">★</label>
+                        <input id="{{restaurante.id}}radio4" type="radio" name="estrellas" value="2">
+                        <label for="{{restaurante.id}}radio4">★</label>
+                        <input id="{{restaurante.id}}radio5" type="radio" name="estrellas" value="1">
+                        <label for="{{restaurante.id}}radio5">★</label>
+                    </p>
+                </form>
             </mat-card-content>
         </mat-card>
     </mat-grid-tile>
 </mat-grid-list>
+<mat-paginator [length]="totalElements" [pageSize]="pageSize" (page)="listarRestaurantes($event.pageIndex)">
+</mat-paginator>

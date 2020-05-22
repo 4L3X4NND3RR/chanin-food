@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-chaninfood',
@@ -10,7 +11,7 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class MenuChaninfoodComponent implements OnInit {
   
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,4 +20,9 @@ export class MenuChaninfoodComponent implements OnInit {
     map(result => result.matches),
     shareReplay()
   );
+
+  estaRestaurantesOrPlatillos(): boolean{
+    const urlComponente = this.router.url.split('/');
+    return urlComponente[1] === 'restaurantes' || urlComponente[1] === 'buscar-restaurante' || urlComponente[1] === 'platillos' || urlComponente[1] === 'buscar-platillo';
+  }
 }

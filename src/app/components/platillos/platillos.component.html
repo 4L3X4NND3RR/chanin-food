@@ -1,0 +1,23 @@
+<h1>Platillos</h1>
+<hr>
+<mat-grid-list cols="3" rowHeight="440px">
+    <mat-grid-tile *ngFor="let platillo of platillos" [colspan]="colspan" [rowspan]="1">
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+                <mat-card-title routerLink="/platillo/{{platillo.id}}" class="link">{{platillo.nombre}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image class="link" routerLink="/platillo/{{platillo.id}}" src="assets/images/platillos/hamburguesa.jpg" alt="Foto platillo" width="100px">
+            <mat-card-content class="dashboard-card-content">
+                <strong>Precio: </strong>
+                <p>{{platillo.precio | currency: 'Q'}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="agregarAlCarrito(platillo)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                    Agregar al carrito
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-paginator [length]="totalElements" [pageSize]="pageSize" (page)="listarPlatillos($event.pageIndex)"></mat-paginator>
