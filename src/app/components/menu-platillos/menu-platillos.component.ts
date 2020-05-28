@@ -22,7 +22,7 @@ export class MenuPlatillosComponent implements OnInit {
     if (hayIdRestaurante) {
       this.serviceRestaurante.getCategorias(+this.route.snapshot.paramMap.get('idRestaurante')).subscribe(
         data => {
-          this.categorias = data;
+          this.categorias = data.sort((a, b) => a.id - b.id);
         }
       );
     } else {

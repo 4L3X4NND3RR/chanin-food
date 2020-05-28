@@ -25,6 +25,11 @@ export class RestauranteService {
     return this.httpClient.get<GetResponseRestaurantes>(searchUrl);
   }
 
+  getIdRestaurante(idCategoria: number): Observable<Restaurante> {
+    const urlIdRestaurante = `http://localhost:8080/api/categorias/${idCategoria}/restaurante`;
+    return this.httpClient.get<Restaurante>(urlIdRestaurante);
+  }
+
   getCategorias(idRestaurante: number): Observable<Categoria[]> {
     const urlCategorias = `${this.baseUrl}/${idRestaurante}/categorias`;
     return this.httpClient.get<GetResponseCategorias>(urlCategorias).pipe(

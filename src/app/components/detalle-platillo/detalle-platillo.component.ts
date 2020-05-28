@@ -44,7 +44,13 @@ export class DetallePlatilloComponent implements OnInit {
   }
 
   agregarProducto(){
-    const theItem = new CartItem(this.platillo);
-    this.cartService.agregarAlCarrito(theItem);
+    this.restaurantService.getIdRestaurante(+localStorage.getItem("categoriaActual")).subscribe(
+      data => {
+        this.platillo.idRestaurante = data.id;
+        this.platillo.nombreRestaurante = data.nombre;
+        const theItem = new CartItem(this.platillo);
+        this.cartService.agregarAlCarrito(theItem);
+      }
+    );
   }
 }

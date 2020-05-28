@@ -15,6 +15,19 @@
                 <span class="link" routerLink="/restaurantes">Chanin Food</span>
                 <span class="example-spacer"></span>
                 <app-cart-status></app-cart-status>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">
+                        <mat-icon>person</mat-icon>
+                        Iniciar sesión
+                    </button>
+                    <button mat-menu-item *ngIf="isAuthenticated" (click)="oktaAuth.logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        Cerrar sesión
+                    </button>
+                </mat-menu>
             </mat-toolbar-row>
             <mat-toolbar-row *ngIf="estaRestaurantesOrPlatillos()">
                 <app-search></app-search>

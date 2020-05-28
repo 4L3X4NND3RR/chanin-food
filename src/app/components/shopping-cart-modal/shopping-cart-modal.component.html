@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Shopping Cart</h1>
+<div mat-dialog-content>
+    <mat-list>
+        <mat-list-item *ngFor="let item of cartItems">
+            <img matListAvatar src="{{item.imageUrl}}" alt="imagen">
+            <p matLine><strong>{{item.nombreRestaurante}}</strong></p>
+            <p matLine><strong>{{item.nombre}}</strong></p>
+            <p matLine><strong>Precio:</strong> {{item.precio | currency: 'Q'}}</p>
+            <p matLine><strong>Cantidad:</strong> {{item.cantidad}}</p>
+            <p matLine><strong>Subtotal:</strong> {{item.susbtotal | currency: 'Q'}}</p>
+            <div matLine>
+                <button mat-icon-button (click)="aumentarCantidad(item)">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button (click)="disminuirCantidad(item)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <button mat-icon-button (click)="eliminar(item)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item>
+            <p matLine><strong>TOTAL: {{total | currency: 'Q'}}</strong></p>
+        </mat-list-item>
+    </mat-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-button color="primary" (click)="irCheckout()">Ir al checkout</button>
+    <button mat-button color="primary" cdkFocusInitial (click)="onNoClick()"  >Seguir ordenando</button>
+</div>

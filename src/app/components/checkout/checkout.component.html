@@ -1,0 +1,49 @@
+<mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="checkoutFormGroup">
+        <form [formGroup]="checkoutFormGroup">
+            <ng-template matStepLabel>Revisa tus datos</ng-template>
+            <mat-form-field class="full-width-input">
+                <mat-label>Nombre</mat-label>
+                <input matInput disabled value="{{nombre}}">
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <mat-label>Apellido</mat-label>
+                <input matInput disabled value="{{apellido}}">
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <mat-label>Email</mat-label>
+                <input matInput disabled value="{{email}}">
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <textarea matInput placeholder="Dirección" formControlName="direccion" required></textarea>
+                <mat-error>
+                    Necesitamos tu dirección
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput type="tel" placeholder="Teléfono" formControlName="telefono" required>
+                <mat-error>
+                    Necesitamos tu teléfono
+                </mat-error>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Revisa tu orden</ng-template>
+        <app-shopin-cart-detil></app-shopin-cart-detil>
+        <div>
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button matStepperNext>Siguiente</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Envia tu orden!</ng-template>
+        <div>
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-raised-button type="submit" color="primary" (click)="onSubmit()">Registrar Pedido</button>
+        </div>
+    </mat-step>
+</mat-vertical-stepper>
