@@ -92,7 +92,10 @@ export class CheckoutComponent implements OnInit {
     for(let idRestaurante of this.restaurantes){
       const pedido: Pedido = new Pedido();
       pedido.entregado = false;
-      pedido.monto_total = this.cartService.totalCalculado;
+      pedido.monto_total = 0;
+      for(let element of this.cartItems){
+        if(idRestaurante === element.idRestaurante) pedido.monto_total += element.susbtotal;
+      }
       pedido.direccion = this.checkoutFormGroup.get("direccion").value;
       pedido.cliente = `${pedido.cliente}${this.id}`;
       pedido.restaurante = `${pedido.restaurante}${idRestaurante}`;
