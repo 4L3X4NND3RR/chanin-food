@@ -9,6 +9,7 @@ import { DetallePedido } from 'src/app/common/detalle-pedido';
 import { Pedido } from 'src/app/common/pedido';
 import { Router } from '@angular/router';
 import { CartItem } from 'src/app/common/cart-item';
+import { MensajeService } from 'src/app/services/mensaje.service';
 
 @Component({
   selector: 'app-checkout',
@@ -32,7 +33,8 @@ export class CheckoutComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     public oktaAuth: OktaAuthService, 
     private servicePedido: PedidosService, 
-    private cartService: CartService, 
+    private cartService: CartService,
+    private mensajeService: MensajeService, 
     private snackbar: MatSnackBar,
     private router: Router) { }
 
@@ -97,10 +99,12 @@ export class CheckoutComponent implements OnInit {
         if(idRestaurante === element.idRestaurante) pedido.monto_total += element.susbtotal;
       }
       pedido.direccion = this.checkoutFormGroup.get("direccion").value;
+      pedido.telefono = this.checkoutFormGroup.get("telefono").value;
       pedido.cliente = `${pedido.cliente}${this.id}`;
       pedido.restaurante = `${pedido.restaurante}${idRestaurante}`;
       this.servicePedido.registrarPedido(pedido).subscribe(
         value => {
+          this.mensajeService.sendMessage(JSON.stringify(value));
           this.registrarDetalle(value.id, idRestaurante);
         }
       );
