@@ -6,7 +6,7 @@
             <mat-card-header>
                 <mat-card-title routerLink="/platillo/{{platillo.id}}" class="link">{{platillo.nombre}}</mat-card-title>
             </mat-card-header>
-            <img mat-card-image class="link" routerLink="/platillo/{{platillo.id}}" src="assets/images/platillos/hamburguesa.jpg" alt="Foto platillo" width="100px">
+            <img mat-card-image class="link" routerLink="/platillo/{{platillo.id}}" src="{{platillo.imageUrl}}" alt="Foto platillo" width="100px" height="250px">
             <mat-card-content class="dashboard-card-content">
                 <strong>Precio: </strong>
                 <p>{{platillo.precio | currency: 'Q'}}</p>

@@ -3,6 +3,7 @@ export class Platillo {
     nombre: string;
     precio: number;
     imageUrl: string;
+    descripcion: string;
     idRestaurante: number;
     nombreRestaurante: string;
 }
