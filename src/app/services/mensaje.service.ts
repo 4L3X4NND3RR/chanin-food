@@ -15,7 +15,7 @@ export class MensajeService {
   }
 
   initializeWebSocketConnection() {
-    const serverUrl = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/socketpedidos';
+    const serverUrl = 'http://chaninfoodapirest-env-1.eba-qpcjtrfp.us-east-2.elasticbeanstalk.com/socketpedidos';
     const ws = new SockJS(serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
