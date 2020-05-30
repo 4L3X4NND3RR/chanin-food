@@ -11,9 +11,9 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
   providedIn: 'root'
 })
 export class PedidosService {
-  private baseUrlCliente = 'http://localhost:8080/api/clientes';
-  private baseUrlDetalle = 'http://localhost:8080/api/detallePedidos';
-  private baseUrlPedido = 'http://localhost:8080/api/pedidos';
+  private baseUrlCliente = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/clientes';
+  private baseUrlDetalle = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/detallePedidos';
+  private baseUrlPedido = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/pedidos';
 
   constructor(private httpClient: HttpClient) { }
 

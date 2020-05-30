@@ -10,9 +10,9 @@ import { Platillo } from '../common/platillo';
   providedIn: 'root'
 })
 export class RestauranteService {
-  private baseUrl = 'http://localhost:8080/api/restaurantes';
-  private baseUrlPlatillos = 'http://localhost:8080/api/platillos/search';
-  private baseUrlPlatillo = 'http://localhost:8080/api/platillos';
+  private baseUrl = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/restaurantes';
+  private baseUrlPlatillos = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/platillos/search';
+  private baseUrlPlatillo = 'http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/platillos';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -26,7 +26,7 @@ export class RestauranteService {
   }
 
   getIdRestaurante(idCategoria: number): Observable<Restaurante> {
-    const urlIdRestaurante = `http://localhost:8080/api/categorias/${idCategoria}/restaurante`;
+    const urlIdRestaurante = `http://chanin-food-api.us-east-2.elasticbeanstalk.com/api/categorias/${idCategoria}/restaurante`;
     return this.httpClient.get<Restaurante>(urlIdRestaurante);
   }
 

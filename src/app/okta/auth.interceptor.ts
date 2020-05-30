@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> { 
     // Only add an access token to whitelisted origins
-    const allowedOrigins = ['http://localhost'];
+    const allowedOrigins = ['http://http://chanin-food-api.us-east-2.elasticbeanstalk.com'];
     if (allowedOrigins.some(url => request.urlWithParams.includes(url))) {
       if(request.method.toString() != 'GET'){
         const accessToken = await this.oktaAuth.getAccessToken();
